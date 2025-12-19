@@ -36,7 +36,7 @@ You detected implementation context because:
 
 1. **Read Context**
    ```bash
-   cat AGENTS.md 2>/dev/null || echo "No AGENTS.md"
+   cat CLAUDE.md 2>/dev/null || echo "No CLAUDE.md"
    cat CODEMAPS.md 2>/dev/null || echo "No CODEMAPS.md"
    ```
 

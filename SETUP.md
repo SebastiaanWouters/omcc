@@ -112,25 +112,18 @@ mkdir -p .claude/skills
 cp -r /path/to/omcc/templates/skills/* .claude/skills/
 
 # Copy other templates
-cp /path/to/omcc/templates/project-claude.md .claude/CLAUDE.md
-cp /path/to/omcc/templates/project-agents.md AGENTS.md
+cp /path/to/omcc/templates/project-claude.md CLAUDE.md
 cp /path/to/omcc/templates/project-codemaps.md CODEMAPS.md
 
-# Edit to match your project
-$EDITOR .claude/CLAUDE.md
+# Edit CLAUDE.md to match your project
+$EDITOR CLAUDE.md
 ```
 
-### Option B: Reference OMCC Directly
+### Option B: Let Claude Do It (Recommended)
 
-Add to your `.claude/CLAUDE.md`:
+Tell Claude: "Set up OMCC from https://github.com/SebastiaanWouters/omcc"
 
-```markdown
-# Project Context
-...your project info...
-
-## Workflow
-See: @/path/to/omcc/templates/project-agents.md
-```
+Claude will auto-detect your project info and create a customized CLAUDE.md.
 
 ## Step 5: Initialize Beads
 

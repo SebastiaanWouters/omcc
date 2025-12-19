@@ -28,7 +28,7 @@ If any tool is missing, stop and direct to SETUP.md.
 ## 3. Read Project Context
 
 ```bash
-cat AGENTS.md 2>/dev/null || echo "No AGENTS.md found"
+cat CLAUDE.md 2>/dev/null || echo "No CLAUDE.md found"
 cat CODEMAPS.md 2>/dev/null || echo "No CODEMAPS.md found"
 ```
 

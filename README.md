@@ -62,7 +62,6 @@ When Claude sets up OMCC, it creates:
 ```
 your-project/
 ├── .claude/
-│   ├── CLAUDE.md              # Your project context
 │   ├── skills/
 │   │   ├── planning/          # Auto-detects planning needs
 │   │   ├── decomposition/     # Auto-detects task breakdown
@@ -71,7 +70,7 @@ your-project/
 │   └── rules/                 # Safety constraints
 ├── .plans/                    # Planning outputs
 ├── .beads/                    # Task tracking
-├── AGENTS.md                  # Workflow reference
+├── CLAUDE.md                  # Project context + workflow
 └── CODEMAPS.md                # Architecture docs
 ```
 

@@ -45,30 +45,18 @@ Use WebFetch to get each file and Write to create it:
 - Fetch and write both rule files from `templates/rules/`
 
 **Project files:**
-- Fetch `templates/project-agents.md` → `AGENTS.md`
 - Fetch `templates/project-codemaps.md` → `CODEMAPS.md`
+- Fetch `templates/project-claude.md` → use as template for `CLAUDE.md`
 
-## Step 4: Create CLAUDE.md
+## Step 4: Create CLAUDE.md (Smart Customization)
 
-Ask user for project details, then create `.claude/CLAUDE.md`:
+Use smart auto-detection before asking questions:
 
-```markdown
-# Project: [NAME]
+1. **Auto-detect** project name, tech stack, structure from files
+2. **Ask only** what can't be detected (project purpose, special conventions)
+3. **Fill template** from `templates/project-claude.md` with gathered info
 
-## Tech Stack
-[FROM USER]
-
-## Key Directories
-[FROM USER]
-
-## Commands
-- Build: [FROM USER]
-- Test: [FROM USER]
-- Run: [FROM USER]
-
-## Workflow
-This project uses OMCC. See @AGENTS.md for workflow details.
-```
+See INIT.md for detailed customization workflow.
 
 ## Step 5: Initialize Beads
 

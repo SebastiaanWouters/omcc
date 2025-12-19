@@ -1,29 +1,67 @@
-# Project: {PROJECT_NAME}
+# {PROJECT_NAME}
 
 ## Overview
-{Brief description of what this project does}
+{DESCRIPTION}
 
 ## Tech Stack
-- Language: {e.g., TypeScript, Python}
-- Framework: {e.g., React, FastAPI}
-- Database: {e.g., PostgreSQL, MongoDB}
-- Other: {key dependencies}
+{TECH_STACK}
 
-## Key Directories
+## Structure
 ```
-src/           # Source code
-tests/         # Test files
-docs/          # Documentation
+{DIRECTORY_STRUCTURE}
 ```
 
 ## Commands
-- **Build**: `{build command}`
-- **Test**: `{test command}`
-- **Run**: `{run command}`
-- **Lint**: `{lint command}`
+```bash
+# Build
+{BUILD_CMD}
+
+# Test
+{TEST_CMD}
+
+# Run
+{RUN_CMD}
+
+# Lint
+{LINT_CMD}
+```
 
 ## Workflow
-This project uses the OMCC workflow (Planning → Decomposition → Implementation).
 
-See workflow details: @AGENTS.md
-See architecture: @CODEMAPS.md
+This project uses OMCC (Planning → Decomposition → Implementation).
+
+### Phase Detection
+- Describing new features → Planning phase activates
+- `.plans/` exists + "break down" → Decomposition activates
+- `.beads/` has tasks + "implement" → Implementation activates
+
+### Commands
+| Command | Purpose |
+|---------|---------|
+| `/plan <feature>` | Start planning |
+| `/decompose` | Create tasks from plan |
+| `/implement` | Execute tasks |
+| `/status` | Show current state |
+
+### Tools (Required)
+```bash
+bd ready --json      # List available tasks
+bv --robot-triage    # Get AI recommendations
+cass search "x" --robot  # Search past sessions
+cm context "x" --json    # Get learned patterns
+ubs --staged         # Scan for bugs before commit
+```
+
+**Never run bare `bv` or `cass` - they hang!**
+
+## Architecture
+
+See CODEMAPS.md for detailed architecture (create as you build).
+
+## Patterns & Conventions
+
+{PATTERNS}
+
+## Key Files
+
+{KEY_FILES}
