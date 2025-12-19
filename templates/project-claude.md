@@ -62,6 +62,10 @@ See CODEMAPS.md for detailed architecture (create as you build).
 
 {PATTERNS}
 
+## AI Guidelines
+
+{AI_RULES}
+
 ## Key Files
 
 {KEY_FILES}

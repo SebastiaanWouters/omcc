@@ -54,7 +54,12 @@ Use smart auto-detection before asking questions:
 
 1. **Auto-detect** project name, tech stack, structure from files
 2. **Ask only** what can't be detected (project purpose, special conventions)
-3. **Fill template** from `templates/project-claude.md` with gathered info
+3. **ALWAYS ask**: "Any specific rules or guidelines for the AI to follow?"
+4. **Fill template** from `templates/project-claude.md` with gathered info
+
+If user provides AI rules:
+- Create `.claude/rules/project.md` with their rules as bullet points
+- Add summary to CLAUDE.md under "## AI Guidelines"
 
 See INIT.md for detailed customization workflow.
 

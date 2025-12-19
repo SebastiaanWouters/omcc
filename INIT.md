@@ -39,7 +39,8 @@ Use WebFetch to get each file from raw GitHub URLs, then Write locally:
 | `templates/skills/decomposition/SKILL.md` | `.claude/skills/decomposition/SKILL.md` |
 | `templates/skills/implementation/SKILL.md` | `.claude/skills/implementation/SKILL.md` |
 | `templates/commands/*.md` (6 files) | `.claude/commands/*.md` |
-| `templates/rules/*.md` (2 files) | `.claude/rules/*.md` |
+| `templates/rules/safety.md` | `.claude/rules/safety.md` |
+| `templates/rules/coordination.md` | `.claude/rules/coordination.md` |
 | `templates/project-codemaps.md` | `CODEMAPS.md` |
 
 Base URL: `https://raw.githubusercontent.com/SebastiaanWouters/omcc/main/`
@@ -85,7 +86,24 @@ Questions to ask (skip if auto-detected):
 
 4. "Any patterns or conventions I should follow?"
    e.g., "Use functional components", "All errors go to Sentry"
+
+5. "Any specific rules or guidelines for the AI?" (ALWAYS ASK)
+   e.g., "No emojis", "Always write tests", "Use TypeScript strict mode"
+   This creates custom rules - important for consistent AI behavior!
 ```
+
+### Handle Custom AI Rules
+
+If user provides AI guidelines:
+
+1. **Create `.claude/rules/project.md`**:
+```markdown
+# Project-Specific Rules
+
+{user_provided_rules - each as a bullet point}
+```
+
+2. **Add summary to CLAUDE.md** under "## AI Guidelines" section
 
 ### Create CLAUDE.md
 
@@ -115,6 +133,9 @@ Replace placeholders with gathered info:
 
 ## Patterns & Conventions
 {user_provided_or_none}
+
+## AI Guidelines
+{user_rules_summary_or_"See .claude/rules/ for project rules"}
 
 ## Key Files
 {detected_entry_points}
