@@ -1,114 +1,28 @@
 # OMCC: Oh My Claude Code
 
-A single source of truth for Claude Code workflows. Reference this repo from your projects to get an auto-detecting, multi-phase development workflow.
+A single source of truth for Claude Code workflows. Tell Claude to set itself up and start building.
 
-## What It Does
+## One-Line Setup
 
-OMCC provides a 3-phase workflow that Claude automatically detects and guides you through:
+In any project, tell Claude:
 
+> **"Set up OMCC from https://github.com/SebastiaanWouters/omcc"**
+
+Claude will automatically:
+1. Fetch all skills, commands, and rules
+2. Create the `.claude/` directory structure
+3. Initialize beads tracking
+4. Ask for your project details
+5. Be ready to work
+
+## What You Get
+
+**3-Phase Auto-Detecting Workflow:**
 1. **Planning** → Research, brainstorm, create `.plans/<feature>.md`
 2. **Decomposition** → Break plans into beads (tasks) with dependencies
 3. **Implementation** → Execute beads with validation and coordination
 
-No manual mode switching. The agent detects context and activates the right workflow.
-
-## Quick Start
-
-### 1. Install Tools
-
-```bash
-# All 5 tools are required
-curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/beads/main/install.sh | bash
-curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/coding_agent_session_search/main/install.sh | bash
-curl -L https://github.com/Dicklesworthstone/cass_memory_system/releases/latest/download/cm-linux-amd64 -o ~/.local/bin/cm && chmod +x ~/.local/bin/cm
-curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/ultimate_bug_scanner/master/install.sh | bash
-
-# Verify
-bd --version && bv --version && cass --version && cm --version && ubs --version
-```
-
-### 2. Set Up Your Project
-
-```bash
-# Option A: Copy templates
-cp -r /path/to/omcc/templates/* your-project/
-
-# Option B: Reference OMCC (in your CLAUDE.md)
-echo "See workflow: @/path/to/omcc/templates/project-agents.md" >> .claude/CLAUDE.md
-```
-
-### 3. Initialize Project
-
-```bash
-cd your-project
-mkdir -p .claude/skills .claude/commands .claude/rules
-bd init
-git add .beads/ && git commit -m "Initialize OMCC workflow"
-```
-
-### 4. Start Working
-
-Just describe what you want to build. The agent will:
-- Detect you need planning
-- Guide you through research
-- Create a plan for approval
-- Offer to decompose into tasks
-- Execute with validation
-
-Or use explicit commands:
-- `/plan <feature>` - Start planning
-- `/decompose` - Create beads from plan
-- `/implement` - Start coding
-
-## Workflow Overview
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    PLANNING                             │
-│  User describes feature → Agent researches →           │
-│  Brainstorms approaches → Creates .plans/<name>.md     │
-└────────────────────────────┬────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────┐
-│                  DECOMPOSITION                          │
-│  Loads plan → Creates beads interactively →            │
-│  Maps dependencies → Stores in .beads/                 │
-└────────────────────────────┬────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────┐
-│                  IMPLEMENTATION                         │
-│  Selects task (AI-prioritized) → Claims bead →         │
-│  Implements → Validates (ubs) → Closes → Repeats       │
-└─────────────────────────────────────────────────────────┘
-```
-
-## Multi-Agent Support
-
-For parallel work, set up Agent Mail MCP. Agents will:
-- Register and coordinate
-- Reserve files before editing
-- Announce claims and completions
-- Prevent conflicts automatically
-
-## File Structure
-
-```
-your-project/
-├── .claude/
-│   ├── CLAUDE.md          # Project context
-│   ├── skills/            # Auto-detected workflows
-│   ├── commands/          # /slash commands
-│   └── rules/             # Safety constraints
-├── .plans/                # Planning outputs
-├── .beads/                # Task tracking
-├── AGENTS.md              # Workflow instructions
-└── CODEMAPS.md            # Architecture docs
-```
-
-## Commands Reference
-
+**6 Slash Commands:**
 | Command | Purpose |
 |---------|---------|
 | `/plan <name>` | Start planning phase |
@@ -118,27 +32,73 @@ your-project/
 | `/next-bead` | Find next task |
 | `/status` | Show workflow state |
 
-## Tools
+**Auto-Detection:** Just describe what you want to build. No manual mode switching.
 
-5 tools are required: `bd`, `bv`, `cass`, `cm`, `ubs`
+## Prerequisites
 
-**Critical**: Always use `--json` or `--robot` flags. Bare `bv` and `cass` commands hang agents.
+Install the 5 required tools first:
 
-See [docs/TOOLS.md](docs/TOOLS.md) for complete reference.
+```bash
+# Beads (bd + bv)
+curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/beads/main/install.sh | bash
 
-## @ Reference Syntax
+# CASS
+curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/coding_agent_session_search/main/install.sh | bash
 
-In CLAUDE.md and other config files, use `@path/to/file` to include content from another file:
+# cass-memory (cm) - adjust for your OS
+curl -L https://github.com/Dicklesworthstone/cass_memory_system/releases/latest/download/cm-linux-amd64 -o ~/.local/bin/cm && chmod +x ~/.local/bin/cm
 
-```markdown
-See workflow: @AGENTS.md
-See architecture: @CODEMAPS.md
+# UBS
+curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/ultimate_bug_scanner/master/install.sh | bash
+
+# Verify
+bd --version && bv --version && cass --version && cm --version && ubs --version
 ```
 
-This tells Claude to read the referenced file for context.
+## How It Works
+
+When Claude sets up OMCC, it creates:
+
+```
+your-project/
+├── .claude/
+│   ├── CLAUDE.md              # Your project context
+│   ├── skills/
+│   │   ├── planning/          # Auto-detects planning needs
+│   │   ├── decomposition/     # Auto-detects task breakdown
+│   │   └── implementation/    # Auto-detects coding work
+│   ├── commands/              # 6 slash commands
+│   └── rules/                 # Safety constraints
+├── .plans/                    # Planning outputs
+├── .beads/                    # Task tracking
+├── AGENTS.md                  # Workflow reference
+└── CODEMAPS.md                # Architecture docs
+```
+
+## Usage
+
+After setup, just describe what you want to build:
+
+> "I need a user authentication system with JWT tokens"
+
+Claude will:
+- Detect you need planning
+- Research your codebase
+- Brainstorm approaches
+- Create a structured plan
+- Offer to break it into tasks
+- Execute with validation
+
+Or use explicit commands: `/plan auth-system`
+
+## Optional: Multi-Agent Mode
+
+For parallel work, set up Agent Mail MCP. See [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 
 ## More Info
 
-- [SETUP.md](SETUP.md) - Detailed installation
-- [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md) - Why this workflow
+- [SETUP.md](SETUP.md) - Manual setup & troubleshooting
+- [INIT.md](INIT.md) - What Claude does during setup
 - [docs/TOOLS.md](docs/TOOLS.md) - Tool reference
+- [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md) - Why this workflow
+- [examples/](examples/) - Sample plans and beads
